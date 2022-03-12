@@ -1,0 +1,101 @@
+openapi: 3.0.1
+info:
+  title: Peer Document Review
+  description: 'An app that allows users to upload documents and get them peer reviewed by other users.'
+  version: 1.0.0
+
+servers:
+- url: https://codio.co.uk/yatabani7/sem2-2122
+  description: Development Server
+
+paths:
+  /accounts:
+    get:
+      tags:
+      - Accounts
+      summary: Check authentication credentials
+      description: This API call is used to validate the credentials passed in the **Authorization headers**.
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+        401:
+          description: invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        description:
+                          type: string
+    post:
+      tags:
+      - Accounts
+      summary: Create a new account
+      description: This API call is used to create a new account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: account added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  msg:
+                    type: string
+        400:
+          description: invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        description:
+                          type: string
+  /home:
+    get:
+      tags:
+      - Documents
+      summary: Check posted documents
+      description: This API call is used to retrieve a document already uploaded
+      responses:
+      
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
