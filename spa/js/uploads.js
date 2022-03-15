@@ -1,14 +1,14 @@
 
-/* foo.js */
+/* uploads.js */
 
 import { customiseNavbar, file2DataURI, loadPage, secureGet, showMessage } from '../util.js'
 
 export async function setup(node) {
-	console.log('FOO: setup')
+	console.log('UPLOADS: setup')
 	try {
 		console.log(node)
-		document.querySelector('header p').innerText = 'Foobar'
-		customiseNavbar(['home', 'logout', 'foo'])
+		document.querySelector('header p').innerText = 'Upload a document'
+		customiseNavbar(['home','uploads' ,'logout'])
 		if(localStorage.getItem('authorization') === null) loadPage('login')
 		// there is a token in localstorage
 		node.querySelector('form').addEventListener('submit', await uploadData)
@@ -22,7 +22,15 @@ async function uploadData(event) {
 	event.preventDefault()
 	const element = document.querySelector('input[name="file"]')
 	console.log(element)
+
+	const title = document.querySelector('input[name="title"]').value
+	const description = document.querySelector('input[name="description"]').value
+	const category = document.querySelector(".categoryDropdown select").value
 	const file = document.querySelector('input[name="file"]').files[0]
+	file.title = title
+	file.description = description
+	file.category = category
+	console.log(file.title)
 	file.base64 = await file2DataURI(file)
 	file.user = localStorage.getItem('username')
 	console.log(file)

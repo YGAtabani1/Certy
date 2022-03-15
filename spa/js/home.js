@@ -8,16 +8,16 @@ export async function setup(node) {
 	try {
 		console.log(node)
 		document.querySelector('header p').innerText = 'Home'
-		customiseNavbar(['home', 'foo', 'logout']) // navbar if logged in
+		customiseNavbar(['home', 'uploads','logout']) // navbar if logged in
 		const token = localStorage.getItem('authorization')
 		console.log(token)
-		if(token === null) customiseNavbar(['home', 'register', 'login']) //navbar if logged out
-		// add content to the page
+		if(token === null) customiseNavbar(['register', 'login']) //navbar if logged out
+			// add content to the page
 		await addContent(node)
-	} catch(err) {
+	catch(err) {
 		console.error(err)
+		}
 	}
-}
 
 // this example loads the data from a JSON file stored in the uploads directory
 async function addContent(node) {
