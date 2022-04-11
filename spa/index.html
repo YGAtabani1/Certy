@@ -17,7 +17,7 @@
 			<ul>
 				<li><a href="/">Home</a></li>
 				<li><a href="/register">Register</a></li>
-				<li><a href="/uploads">Add Document</a></li>
+				<li><a href="/uploads">Add A Document</a></li>
 				<li><a href="/login">Log in</a></li>
 				<li><a href="/logout">Log out</a></li>
 			</ul>
@@ -31,7 +31,6 @@
 		</footer>
 	</body>
 	<template id="home">
-		
 	</template>
 	<template id="login">
 		<form name="login">
@@ -64,13 +63,14 @@
 					<option value="other">Other</option>
 				</select>
 			</div></p>
-			<p><label for="pass">Choose a file</label><br /><input type="file" name="file" /></p>
+			<p><label for="pass">Choose a file</label><br /><input type="file" name="file" accept="application/pdf,application/vnd.ms-excel"/></p>
 			<p><button type="submit">Upload</button></p>
 		</form>
-	</template>
-	<template id="quote">
+	<template id="document">
 		<section>
 			<h2></h2>
+			<p></p>
+			<p></p>
 			<p></p>
 		</section>
 	</template>

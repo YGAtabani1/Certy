@@ -5,6 +5,7 @@ import { Router } from 'https://deno.land/x/oak@v6.5.1/mod.ts'
 
 import { extractCredentials, saveFile } from './modules/util.js'
 import { login, register } from './modules/accounts.js'
+import {addDocument, getDocuments} from './modules/documents.js'
 
 const router = new Router()
 
@@ -53,6 +54,34 @@ router.post('/api/accounts', async context => {
 	context.response.body = JSON.stringify({ status: 'success', msg: 'account created' })
 })
 
+router.get('/api/files', async context => {
+	console.log('GET /api/accounts')
+	const token = context.request.headers.get('Authorization')
+	console.log(`auth: ${token}`)
+	try {
+		const credentials = extractCredentials(token)
+		console.log(credentials)
+		const username = await login(credentials)
+		console.log(`username: ${username}`)
+		context.response.body = JSON.stringify(
+			{
+				data: { username }
+			}, null, 2)
+	} catch(err) {
+		context.response.status = 401
+		context.response.body = JSON.stringify(
+			{
+				errors: [
+					{
+						title: '401 Unauthorized.',
+						detail: err.message
+					}
+				]
+			}
+		, null, 2)
+	}
+})
+
 router.post('/api/files', async context => {
 	console.log('POST /api/files')
 	try {
@@ -62,6 +91,7 @@ router.post('/api/files', async context => {
 		const data = await body.value
 		console.log(data)
 		saveFile(data.base64, data.user)
+		
 		context.response.status = 201
 		context.response.body = JSON.stringify(
 			{

@@ -11,23 +11,25 @@ export async function setup(node) {
 		customiseNavbar(['home', 'uploads','logout']) // navbar if logged in
 		const token = localStorage.getItem('authorization')
 		console.log(token)
-		if(token === null) customiseNavbar(['register', 'login']) //navbar if logged out
-			// add content to the page
+		if(token === null) customiseNavbar(['home', 'register', 'login']) //navbar if logged out
+			//add content to the page
 		await addContent(node)
-	catch(err) {
+	} catch(err) {
 		console.error(err)
 		}
 	}
-
+}
 // this example loads the data from a JSON file stored in the uploads directory
 async function addContent(node) {
-	const response = await fetch('/uploads/quotes.json')
-	const quotes = await response.json()
-	const template = document.querySelector('template#quote')
-	for(const quote of quotes.data) {
+	const response = await fetch('/uploads/documents.json')
+	const documents = await response.json()
+	const template = document.querySelector('template#document')
+	for(const document of documents.data) {
 		const fragment = template.content.cloneNode(true)
-		fragment.querySelector('h2').innerText = quote.author
-		fragment.querySelector('p').innerText = quote.quote
+		fragment.querySelector('h2').innerText = document.title
+		fragment.querySelector('p').innerText = document.document
+		fragment.querySelector('p').innerText = documet.category
+		fragment.querySelector('p').innerText = documet.description
 		node.appendChild(fragment)
 	}
 }

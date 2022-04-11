@@ -21,15 +21,17 @@ async function uploadData(event) {
 	console.log('func UPLOAD DATA')
 	event.preventDefault()
 	const element = document.querySelector('input[name="file"]')
-	console.log(element)
-
 	const title = document.querySelector('input[name="title"]').value
 	const description = document.querySelector('input[name="description"]').value
 	const category = document.querySelector(".categoryDropdown select").value
 	const file = document.querySelector('input[name="file"]').files[0]
+	const states = ['uplaoded', '']
+	file.stamp = Date.now()
 	file.title = title
 	file.description = description
 	file.category = category
+	file.status = status
+	console.log(file.status)
 	console.log(file.title)
 	file.base64 = await file2DataURI(file)
 	file.user = localStorage.getItem('username')
