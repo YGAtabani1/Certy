@@ -22,15 +22,16 @@ async function uploadData(event) {
 	event.preventDefault()
 	const element = document.querySelector('input[name="file"]')
 	const title = document.querySelector('input[name="title"]').value
-	const description = document.querySelector('input[name="description"]').value
+	const description = document.querySelector('textarea[name="description"]').value
 	const category = document.querySelector(".categoryDropdown select").value
-	const file = document.querySelector('input[name="file"]').files[0]
-	const states = ['uplaoded', '']
+	//const file = document.querySelector('input[name="file"]').files[0]
+	const states = ['uplaoded','Require Amendments' ,'verified']
 	file.stamp = Date.now()
+	file.date_modified = document.lastModified()
 	file.title = title
 	file.description = description
 	file.category = category
-	file.status = status
+	file.status = states[0]
 	console.log(file.status)
 	console.log(file.title)
 	file.base64 = await file2DataURI(file)
@@ -52,3 +53,10 @@ async function uploadData(event) {
 	showMessage('file uploaded')
 	loadPage('home')
 }
+
+
+
+
+
+
+	

@@ -53,10 +53,10 @@
 	<template id="uploads">
 		<form name="upload" method="post">
 			<p><label for="title">Title</label><input type="text" name="title" /></p>
-			<div><p><label for="description">Description</label><input type="text" name="description"/></p></div>
+			<div><p><label for="description">Description</label><textarea type="text" class="markdown" name="description"></textarea></p></div>
 			<p><label for="category">Category</label>
 			<div class="categoryDropdown">
-				<select name="category" id="category">
+				<select name="category" id="category" autofocus>
 					<option value="report">Report</option>
 					<option value="article">Article</option>
 					<option value="story">Story</option>
@@ -66,12 +66,14 @@
 			<p><label for="pass">Choose a file</label><br /><input type="file" name="file" accept="application/pdf,application/vnd.ms-excel"/></p>
 			<p><button type="submit">Upload</button></p>
 		</form>
-	<template id="document">
+	<template id="quote">
 		<section>
 			<h2></h2>
-			<p></p>
-			<p></p>
-			<p></p>
+			<h1></h1>
+			<p><p>
+			<p1></p1>
+			<p2></p2>
+			<embed></embed>
 		</section>
 	</template>
 </html>

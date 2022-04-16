@@ -21,10 +21,10 @@ CREATE TABLE IF NOT EXISTS documents (
   user  VARCHAR(25) NOT NULL,
   title VARCHAR(100) NOT NULL,
   descrip VARCHAR(200) NOT NULL,
-  content BINARY,
-  stat VARCHAR(15),
-  stamp DATE NOT NULL
+  date_modified VARCHAR(50),
+  states VARCHAR(15),
+  document LONGTEXT
 );
 
-INSERT INTO documents (id, user, title, descrip, stamp, content, stat)
-VALUES ("user1","Web3", "This is a document", "1996/08/27","", "Uploaded");
+INSERT INTO documents (user, title, descrip, date_modified, states, document)
+VALUES ("doej", "web3", "about web 3", '2038-01-19 03:14:07', "uploaded", "THIS IS A LONG TEXT");

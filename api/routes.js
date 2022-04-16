@@ -2,7 +2,6 @@
 /* routes.js */
 
 import { Router } from 'https://deno.land/x/oak@v6.5.1/mod.ts'
-
 import { extractCredentials, saveFile } from './modules/util.js'
 import { login, register } from './modules/accounts.js'
 import {addDocument, getDocuments} from './modules/documents.js'
@@ -54,8 +53,39 @@ router.post('/api/accounts', async context => {
 	context.response.body = JSON.stringify({ status: 'success', msg: 'account created' })
 })
 
-router.get('/api/files', async context => {
-	console.log('GET /api/accounts')
+router.get('/api/documents', async context => {
+	console.log('GET /api/documents')
+	try {
+		const token = context.request.headers.get('Authorization')
+		console.log(`auth: ${token}`)
+		//const body  = await context.request.body()
+		//const data = await body.value
+		//console.log(data)
+		//saveFile(data.base64, data.user)
+		getDocuments()
+		context.response.status = 200
+		context.response.body = JSON.stringify(
+			{
+				data: {
+					message: 'retrieval success'
+				}
+			}
+		)
+	} catch(err) {
+		context.response.status = 400
+		context.response.body = JSON.stringify(
+			{
+				errors: [
+					{
+						title: 'a problem occurred',
+						detail: err.message
+					}
+				]
+			}
+		)
+	}
+
+
 	const token = context.request.headers.get('Authorization')
 	console.log(`auth: ${token}`)
 	try {
@@ -91,7 +121,7 @@ router.post('/api/files', async context => {
 		const data = await body.value
 		console.log(data)
 		saveFile(data.base64, data.user)
-		
+		addDocument(data)
 		context.response.status = 201
 		context.response.body = JSON.stringify(
 			{

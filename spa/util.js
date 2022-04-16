@@ -86,6 +86,24 @@ export function file2DataURI(file) {
   })
 }
 
+/*
+const options = {
+    'tables': true,
+    'tasklists': true,
+    'strikethrough': true
+}
+
+const converter = new showdown.Converter(options)
+
+const textarea = document.querySelector('textarea')
+
+textarea.addEventListener('input', event => {
+    const markdown = document.querySelector('textarea').value
+    const html = converter.makeHtml(markdown)
+    document.querySelector('article').innerHTML = html
+})
+*/
+
 /* FUNCTIONS TO MAKE API CALLS
  * all API calls support the JSON:API specification */
 
